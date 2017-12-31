@@ -1,7 +1,6 @@
-package fidelyo.com.recyclerview
+package com.fidelyo.recyclerview
 
 import android.graphics.Rect
-import com.fidelyo.external.recyclerview.SpacingItemDecoration
 
 /**
  * Created by bishoy on 6/17/17.

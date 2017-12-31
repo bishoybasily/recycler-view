@@ -1,4 +1,4 @@
-package com.fidelyo.external.recyclerview
+package com.fidelyo.recyclerview
 
 import android.graphics.Rect
 

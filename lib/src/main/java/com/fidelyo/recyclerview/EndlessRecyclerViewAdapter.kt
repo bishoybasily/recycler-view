@@ -1,8 +1,6 @@
-package com.fidelyo.base.adapter.recycler_view
+package com.fidelyo.recyclerview
 
 import android.view.ViewGroup
-import fidelyo.com.recyclerview.RecyclerViewAdapter
-import fidelyo.com.recyclerview.RecyclerViewViewHolder
 
 /**
  * Created by bishoy on 8/17/17.

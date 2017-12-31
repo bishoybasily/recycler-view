@@ -1,4 +1,4 @@
-package fidelyo.com.recyclerview
+package com.fidelyo.recyclerview
 
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
