@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 
-abstract class AdapterBase<I : AdapterBase.Item, V : ViewHolderBase<I>> : RecyclerView.Adapter<V>() {
+abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerView.Adapter<V>() {
 
     var items: ArrayList<I> = arrayListOf()
 
@@ -44,8 +44,8 @@ abstract class AdapterBase<I : AdapterBase.Item, V : ViewHolderBase<I>> : Recycl
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): V {
         return onCreateItemViewHolder(parent, viewType).apply {
-            if (this@AdapterBase.onItemClickListener != null)
-                onItemClickListener = this@AdapterBase.onItemClickListener
+            if (this@RecyclerViewAdapter.onItemClickListener != null)
+                onItemClickListener = this@RecyclerViewAdapter.onItemClickListener
         }
     }
 

@@ -3,9 +3,9 @@ package fidelyo.com.recyclerview
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
-abstract class ViewHolderBase<I : AdapterBase.Item>(view: View) : RecyclerView.ViewHolder(view) {
+abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(view: View) : RecyclerView.ViewHolder(view) {
 
-    var onItemClickListener: AdapterBase.OnItemClickListener<I>? = null
+    var onItemClickListener: RecyclerViewAdapter.OnItemClickListener<I>? = null
 
     lateinit var i: I
 
