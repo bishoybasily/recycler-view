@@ -8,7 +8,8 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
 
     var items: ArrayList<I> = arrayListOf()
 
-    var onItemClickListener: OnItemClickListener<I>? = null
+    var clickListener: OnItemClickListener<I>? = null
+    var longClickListener: OnItemLongClickListener<I>? = null
 
     fun showAll(p0: ArrayList<I>) {
         items.clear()
@@ -44,8 +45,8 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): V {
         return onCreateItemViewHolder(parent, viewType).apply {
-            if (this@RecyclerViewAdapter.onItemClickListener != null)
-                onItemClickListener = this@RecyclerViewAdapter.onItemClickListener
+            this@apply.clickListener = this@RecyclerViewAdapter.clickListener
+            this@apply.longClickListener = this@RecyclerViewAdapter.longClickListener
         }
     }
 
@@ -72,6 +73,12 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
     interface OnItemClickListener<I : Item> {
 
         fun onClicked(i: I, view: View)
+
+    }
+
+    interface OnItemLongClickListener<I : Item> {
+
+        fun onLongClicked(i: I, view: View): Boolean
 
     }
 }
