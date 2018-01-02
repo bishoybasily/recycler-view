@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+
+apply plugin: "kotlin-kapt"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
 
 android {
     compileSdkVersion 27
@@ -20,6 +23,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -37,6 +44,8 @@ dependencies {
     implementation "com.android.support:design:$support_library_version"
     implementation "com.android.support:support-v4:$support_library_version"
     implementation "com.android.support:recyclerview-v7:$support_library_version"
+
+    kapt 'com.android.databinding:compiler:3.0.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
