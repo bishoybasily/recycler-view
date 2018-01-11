@@ -7,8 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import com.fidelyo.recyclerview.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -24,18 +22,14 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = ada
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        ada.clickListener = object : RecyclerViewAdapter.OnItemClickListener<Thing> {
-            override fun onClicked(i: Thing, view: View) {
-                Log.w("@@", "Clicked ${i.name}")
-                i.setSelected(!i.selected)
-            }
-
+        ada.onClick { i, v ->
+            Log.w("@@", "Clicked ${i.name}")
+            i.setSelected(!i.selected)
         }
-        ada.longClickListener = object : RecyclerViewAdapter.OnItemLongClickListener<Thing> {
-            override fun onLongClicked(i: Thing, view: View): Boolean {
-                Log.w("@@", "Long clicked ${i.name}")
-                return true
-            }
+
+        ada.onLongClick { i, view ->
+            Log.w("@@", "Long clicked ${i.name}")
+            return@onLongClick true
         }
 
         val things = ArrayList<Thing>()

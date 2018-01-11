@@ -9,7 +9,7 @@ import android.view.ViewGroup
 abstract class EndlessRecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerViewAdapter<I, V>() {
 
     override fun getItemViewType(position: Int): Int {
-        if (items[position] is ItemLoader)
+        if (get(position) is ItemLoader)
             return ItemLoader.TYPE
         return super.getItemViewType(position)
     }
