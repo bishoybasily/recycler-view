@@ -6,32 +6,35 @@ import android.view.ViewGroup
 
 abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerView.Adapter<V>() {
 
-    private val items: ArrayList<I> = arrayListOf()
+    private val items: MutableList<I> = arrayListOf()
 
     private var clickListener: OnItemClickListener<I>? = null
     private var longClickListener: OnItemLongClickListener<I>? = null
 
-    fun showAll(p0: ArrayList<I>) {
+    fun showAll(p0: MutableList<I>) {
         items.clear()
         items.addAll(p0)
         notifyDataSetChanged()
     }
 
-    fun append(p0: ArrayList<I>) {
-        items.addAll(p0)
-        notifyItemRangeInserted(items.size - p0.size, p0.size)
+    fun append(p0: MutableList<I>) {
+        if (items.addAll(p0))
+            notifyItemRangeInserted(items.size - p0.size, p0.size)
     }
 
     fun append(p0: I) {
-        val position = items.size
         if (items.add(p0))
-            notifyItemInserted(position)
+            notifyItemInserted(items.size - 1)
+    }
+
+    fun remove(p0: MutableList<I>) {
+        if (items.removeAll(p0))
+            notifyItemRangeRemoved(items.size + p0.size, p0.size)
     }
 
     fun remove(p0: I) {
-        val position = items.indexOf(p0)
         if (items.remove(p0))
-            notifyItemRemoved(position)
+            notifyItemRemoved(items.size + 1)
     }
 
     fun get(index: Int): I {
@@ -56,15 +59,15 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
 
     abstract fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): V
 
-    override final fun onBindViewHolder(holder: V, position: Int) {
+    final override fun onBindViewHolder(holder: V, position: Int) {
         holder.bind(items[position])
     }
 
-    override final fun onViewRecycled(holder: V) {
+    final override fun onViewRecycled(holder: V) {
         holder.recycle()
     }
 
-    override final fun getItemCount() = items.size
+    final override fun getItemCount() = items.size
 
     fun onClick(handler: (I, View) -> Unit) {
         clickListener = object : OnItemClickListener<I> {
@@ -90,13 +93,13 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
 
     }
 
-    interface OnItemClickListener<I : Item> {
+    interface OnItemClickListener<in I : Item> {
 
         fun onClicked(i: I, view: View)
 
     }
 
-    interface OnItemLongClickListener<I : Item> {
+    interface OnItemLongClickListener<in I : Item> {
 
         fun onLongClicked(i: I, view: View): Boolean
 

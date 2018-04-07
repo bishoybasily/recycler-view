@@ -3,9 +3,7 @@ package com.fidelyo.recyclerview
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
-abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(adapter: RecyclerViewAdapter<*, *>,
-                                                                    view: View) :
-        RecyclerView.ViewHolder(view) {
+abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(val adapter: RecyclerViewAdapter<I, *>, val view: View) : RecyclerView.ViewHolder(view) {
 
     var clickListener: RecyclerViewAdapter.OnItemClickListener<I>? = null
     var longClickListener: RecyclerViewAdapter.OnItemLongClickListener<I>? = null
@@ -34,5 +32,9 @@ abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(adapter: Rec
     abstract fun onAttached(i: I)
 
     abstract fun onDetached(i: I)
+
+    fun removeMe() {
+        adapter.remove(i)
+    }
 
 }

@@ -20,20 +20,20 @@ class AdapterThings :
         return ThingViewHolder(this, DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_thing, parent, false))
     }
 
-    class ThingViewHolder(val adapter: AdapterThings,
+    class ThingViewHolder(adapter: AdapterThings,
                           val binder: ItemThingBinding) :
             RecyclerViewBindingViewHolder<Thing, ItemThingBinding>(adapter, binder) {
 
-        override fun onAttached(thing: Thing) {
-            binder.thing = thing
+        override fun onAttached(i: Thing) {
+            binder.thing = i
             binder.executePendingBindings()
 
             itemView.remove.setOnClickListener {
-                adapter.remove(thing)
+                adapter.remove(i)
             }
         }
 
-        override fun onDetached(thing: Thing) {
+        override fun onDetached(i: Thing) {
 
         }
     }

@@ -11,16 +11,17 @@ class GridSpacingItemDecoration(spacing: Int, val columns: Int) : SpacingItemDec
         override fun isSpan(position: Int) = false
     }
 
-    override fun applySpacing(index: Int, rect: Rect) {
+    override fun applySpacing(position: Int, outRect: Rect) {
 
-        val column = index % columns // item column
+        val column = position % columns // item column
 
-        if (index < columns) { // top edge
-            rect.top = spacing
+        if (position < columns) { // top edge
+            outRect.top = spacing
         }
-        rect.bottom = spacing // item bottom
-        rect.left = spacing - column * (spacing / columns) // spacing - column * ((1f / columns) * spacing)
-        rect.right = (column + 1) * (spacing / columns) // (column + 1) * ((1f / columns) * spacing)
+
+        outRect.bottom = spacing // item bottom
+        outRect.left = spacing - column * (spacing / columns) // spacing - column * ((1f / columns) * spacing)
+        outRect.right = (column + 1) * (spacing / columns) // (column + 1) * ((1f / columns) * spacing)
 
     }
 
