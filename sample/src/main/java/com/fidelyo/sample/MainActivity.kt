@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = ada
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        ada.onClick { i, v ->
+        ada.onClick { i, _ ->
             Log.w("@@", "Clicked ${i.name}")
             i.setSelected(!i.selected)
         }
