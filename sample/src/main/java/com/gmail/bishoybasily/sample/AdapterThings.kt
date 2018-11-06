@@ -1,11 +1,11 @@
-package com.fidelyo.sample
+package com.gmail.bishoybasily.sample
 
-import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.fidelyo.recyclerview.RecyclerViewAdapter
-import com.fidelyo.recyclerview.RecyclerViewBindingViewHolder
-import com.fidelyo.sample.databinding.ItemThingBinding
+import androidx.databinding.DataBindingUtil
+import com.gmail.bishoybasily.recyclerview.RecyclerViewAdapter
+import com.gmail.bishoybasily.recyclerview.RecyclerViewBindingViewHolder
+import com.gmail.bishoybasily.sample.databinding.ItemThingBinding
 import kotlinx.android.synthetic.main.item_thing.view.*
 
 /**

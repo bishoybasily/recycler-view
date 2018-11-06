@@ -1,4 +1,4 @@
-package com.fidelyo.recyclerview
+package com.gmail.bishoybasily.recyclerview
 
 import android.graphics.Rect
 

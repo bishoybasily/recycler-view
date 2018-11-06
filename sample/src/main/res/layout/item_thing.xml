@@ -7,7 +7,7 @@
 
         <variable
             name="thing"
-            type="com.fidelyo.sample.Thing" />
+            type="com.gmail.bishoybasily.sample.Thing" />
 
     </data>
 

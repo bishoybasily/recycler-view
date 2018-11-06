@@ -1,12 +1,12 @@
-package com.fidelyo.recyclerview
+package com.gmail.bishoybasily.recyclerview
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 
 abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerView.Adapter<V>() {
 
-    private val items: MutableList<I> = arrayListOf()
+    private val items: ArrayList<I> = ArrayList()
 
     private var clickListener: OnItemClickListener<I>? = null
     private var longClickListener: OnItemLongClickListener<I>? = null
@@ -27,14 +27,16 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
             notifyItemInserted(items.size - 1)
     }
 
-    fun remove(p0: MutableList<I>) {
-        if (items.removeAll(p0))
-            notifyItemRangeRemoved(items.size + p0.size, p0.size)
+    fun remove(position: Int) {
+        if (position >= 0 && position < items.size) {
+            items.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     fun remove(p0: I) {
-        if (items.remove(p0))
-            notifyItemRemoved(items.size + 1)
+        val position = items.indexOf(p0)
+        remove(position)
     }
 
     fun get(index: Int): I {

@@ -1,12 +1,13 @@
-package com.fidelyo.sample
+package com.gmail.bishoybasily.sample
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -17,17 +18,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val ada = AdapterThings()
+        val adapterThings = AdapterThings()
 
-        recycler.adapter = ada
-        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.adapter = adapterThings
+        recycler.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        ada.onClick { i, _ ->
+        adapterThings.onClick { i, _ ->
             Log.w("@@", "Clicked ${i.name}")
             i.setSelected(!i.selected)
         }
 
-        ada.onLongClick { i, view ->
+        adapterThings.onLongClick { i, view ->
             Log.w("@@", "Long clicked ${i.name}")
             return@onLongClick true
         }
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             things.add(Thing().apply { name = "Name $i" })
         }
 
-        ada.showAll(things)
+        adapterThings.showAll(things)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

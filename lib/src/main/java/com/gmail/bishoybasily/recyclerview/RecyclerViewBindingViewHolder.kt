@@ -1,6 +1,6 @@
-package com.fidelyo.recyclerview
+package com.gmail.bishoybasily.recyclerview
 
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
 
 abstract class RecyclerViewBindingViewHolder<I : RecyclerViewAdapter.Item, B : ViewDataBinding>(adapter: RecyclerViewAdapter<I, *>, b: B) :
         RecyclerViewViewHolder<I>(adapter, b.root)
