@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by bishoy on 7/15/17.
  */
 
-abstract class EndlessRecyclerViewScrollListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
         super.onScrolled(recyclerView, dx, dy)
 
         var applicable = false
