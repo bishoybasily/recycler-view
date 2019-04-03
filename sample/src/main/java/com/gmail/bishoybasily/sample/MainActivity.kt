@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             i.setSelected(!i.selected)
         }
 
-        adapterThings.onLongClick { i, view ->
+        adapterThings.onLongClick { i, _ ->
             Log.w("@@", "Long clicked ${i.name}")
             return@onLongClick true
         }
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             things.add(Thing().apply { name = "Name $i" })
         }
 
-        adapterThings.showAll(things)
+        adapterThings.show(things)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

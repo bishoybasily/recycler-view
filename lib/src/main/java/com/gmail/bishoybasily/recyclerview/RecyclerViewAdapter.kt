@@ -6,18 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerView.Adapter<V>() {
 
-    private val items: ArrayList<I> = ArrayList()
+    private val items = ArrayList<I>()
 
     private var clickListener: OnItemClickListener<I>? = null
     private var longClickListener: OnItemLongClickListener<I>? = null
 
-    fun showAll(p0: MutableList<I>) {
+    fun show(p0: Collection<I>) {
         items.clear()
         items.addAll(p0)
         notifyDataSetChanged()
     }
 
-    fun append(p0: MutableList<I>) {
+    fun append(p0: Collection<I>) {
         if (items.addAll(p0))
             notifyItemRangeInserted(items.size - p0.size, p0.size)
     }
@@ -43,7 +43,7 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
         return items[index]
     }
 
-    fun clearAll() {
+    fun clear() {
         items.clear()
         notifyDataSetChanged()
     }
