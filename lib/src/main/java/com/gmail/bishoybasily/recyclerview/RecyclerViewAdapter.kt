@@ -8,6 +8,9 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
 
     private val items = ArrayList<I>()
 
+    val itemsCopy: ArrayList<I>
+        get() = ArrayList(items)
+
     private var clickListener: OnItemClickListener<I>? = null
     private var longClickListener: OnItemLongClickListener<I>? = null
 

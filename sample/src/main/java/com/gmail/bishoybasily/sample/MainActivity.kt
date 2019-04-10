@@ -39,7 +39,10 @@ class MainActivity : AppCompatActivity() {
             things.add(Thing().apply { name = "Name $i" })
         }
 
-        adapterThings.show(things)
+        adapterThings.append(Thing().apply { name = "new appended" })
+
+//        adapterThings.show(things)
+
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

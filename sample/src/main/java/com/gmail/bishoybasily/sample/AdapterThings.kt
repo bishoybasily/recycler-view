@@ -15,10 +15,12 @@ import kotlinx.android.synthetic.main.item_thing.view.*
 class AdapterThings : RecyclerViewAdapter<Thing, AdapterThings.ThingViewHolder>() {
 
     override fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): ThingViewHolder {
-        return ThingViewHolder(this, DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_thing, parent, false))
+        val binder: ItemThingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_thing, parent, false)
+        return ThingViewHolder(this, binder)
     }
 
-    class ThingViewHolder(adapter: AdapterThings, val binder: ItemThingBinding) : RecyclerViewBindingViewHolder<Thing, ItemThingBinding>(adapter, binder) {
+    class ThingViewHolder(adapter: AdapterThings, val binder: ItemThingBinding) :
+            RecyclerViewBindingViewHolder<Thing, ItemThingBinding>(adapter, binder) {
 
         override fun onAttached(i: Thing) {
             binder.thing = i
