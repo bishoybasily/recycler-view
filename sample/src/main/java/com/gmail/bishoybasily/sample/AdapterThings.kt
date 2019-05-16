@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.gmail.bishoybasily.recyclerview.RecyclerViewAdapter
-import com.gmail.bishoybasily.recyclerview.RecyclerViewBindingViewHolder
+import com.gmail.bishoybasily.recyclerview.RecyclerViewViewHolder
 import com.gmail.bishoybasily.sample.databinding.ItemThingBinding
 import kotlinx.android.synthetic.main.item_thing.view.*
 
@@ -20,7 +20,7 @@ class AdapterThings : RecyclerViewAdapter<Thing, AdapterThings.ThingViewHolder>(
     }
 
     class ThingViewHolder(adapter: AdapterThings, val binder: ItemThingBinding) :
-            RecyclerViewBindingViewHolder<Thing, ItemThingBinding>(adapter, binder) {
+            RecyclerViewViewHolder<Thing>(adapter, binder.root) {
 
         override fun onAttached(i: Thing) {
             binder.thing = i
