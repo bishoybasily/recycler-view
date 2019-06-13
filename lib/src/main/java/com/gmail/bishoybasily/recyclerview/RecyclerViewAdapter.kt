@@ -6,48 +6,48 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerView.Adapter<V>() {
 
-    private val items = ArrayList<I>()
+    private val _items = ArrayList<I>()
 
-    val itemsCopy: ArrayList<I>
-        get() = ArrayList(items)
+    val items: List<I>
+        get() = _items
 
     private var clickListener: OnItemClickListener<I>? = null
     private var longClickListener: OnItemLongClickListener<I>? = null
 
     fun show(p0: Collection<I>) {
-        items.clear()
-        items.addAll(p0)
+        _items.clear()
+        _items.addAll(p0)
         notifyDataSetChanged()
     }
 
     fun append(p0: Collection<I>) {
-        if (items.addAll(p0))
-            notifyItemRangeInserted(items.size - p0.size, p0.size)
+        if (_items.addAll(p0))
+            notifyItemRangeInserted(_items.size - p0.size, p0.size)
     }
 
     fun append(p0: I) {
-        if (items.add(p0))
-            notifyItemInserted(items.size - 1)
+        if (_items.add(p0))
+            notifyItemInserted(_items.size - 1)
     }
 
     fun remove(position: Int) {
-        if (position >= 0 && position < items.size) {
-            items.removeAt(position)
+        if (position >= 0 && position < _items.size) {
+            _items.removeAt(position)
             notifyItemRemoved(position)
         }
     }
 
     fun remove(p0: I) {
-        val position = items.indexOf(p0)
+        val position = _items.indexOf(p0)
         remove(position)
     }
 
     fun get(index: Int): I {
-        return items[index]
+        return _items[index]
     }
 
     fun clear() {
-        items.clear()
+        _items.clear()
         notifyDataSetChanged()
     }
 
@@ -65,14 +65,14 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
     abstract fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): V
 
     final override fun onBindViewHolder(holder: V, position: Int) {
-        holder.bind(items[position])
+        holder.bind(_items[position])
     }
 
     final override fun onViewRecycled(holder: V) {
         holder.recycle()
     }
 
-    final override fun getItemCount() = items.size
+    final override fun getItemCount() = _items.size
 
     fun onClick(handler: (I, View) -> Unit) {
         clickListener = object : OnItemClickListener<I> {
