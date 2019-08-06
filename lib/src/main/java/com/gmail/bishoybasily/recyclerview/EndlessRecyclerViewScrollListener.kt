@@ -34,9 +34,9 @@ abstract class EndlessRecyclerViewScrollListener(var visibleThreshold: Int = 4) 
                 lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
             }
 
-            if (applicable && totalItemCount <= lastVisible + visibleThreshold) {
-                recyclerView.post { this.onLoadMore() }
-            }
+            if (applicable && totalItemCount <= lastVisible + visibleThreshold)
+                onLoadMore()
+
         }
     }
 
