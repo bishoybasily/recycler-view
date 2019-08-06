@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by bishoy on 7/15/17.
  */
 
-abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener() {
+abstract class EndlessRecyclerViewScrollListener(var visibleThreshold: Int = 4) : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
@@ -16,7 +16,6 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
 
         var applicable = false
         var lastVisible = 0
-        val visibleThreshold = 3
 
         val manager = recyclerView.layoutManager
         if (manager != null) {
