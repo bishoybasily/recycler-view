@@ -24,16 +24,20 @@ abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(val adapter:
         if (longClick != null)
             this.itemView.setOnLongClickListener { return@setOnLongClickListener longClick.onLongClicked(i, itemView) }
 
-        onAttached(i)
+        attached(i)
     }
 
     fun recycle() {
-        onDetached(i)
+        detached(i)
     }
 
-    abstract fun onAttached(i: I)
+    fun attached(i: I) {
 
-    abstract fun onDetached(i: I)
+    }
+
+    fun detached(i: I) {
+
+    }
 
     fun remove() {
         adapter.remove(i)
