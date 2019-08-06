@@ -31,11 +31,11 @@ abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(val adapter:
         detached(i)
     }
 
-    fun attached(i: I) {
+    open fun attached(i: I) {
 
     }
 
-    fun detached(i: I) {
+    open fun detached(i: I) {
 
     }
 

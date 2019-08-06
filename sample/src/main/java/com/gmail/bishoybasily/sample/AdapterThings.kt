@@ -22,7 +22,8 @@ class AdapterThings : RecyclerViewAdapter<Thing, AdapterThings.ThingViewHolder>(
     class ThingViewHolder(adapter: AdapterThings, val binder: ItemThingBinding) :
             RecyclerViewViewHolder<Thing>(adapter, binder.root) {
 
-        override fun onAttached(i: Thing) {
+        override fun attached(i: Thing) {
+
             binder.thing = i
             binder.executePendingBindings()
 
@@ -31,7 +32,7 @@ class AdapterThings : RecyclerViewAdapter<Thing, AdapterThings.ThingViewHolder>(
             }
         }
 
-        override fun onDetached(i: Thing) {
+        override fun detached(i: Thing) {
 
         }
     }
