@@ -7,9 +7,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gmail.bishoybasily.recyclerview.EndlessRecyclerViewScrollListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,12 +38,29 @@ class MainActivity : AppCompatActivity() {
 
         val things = ArrayList<Thing>()
         for (i in 0..10) {
-            things.add(Thing().apply { name = "Name $i" })
+            things.add(Thing("Name $i"))
         }
 
-        adapterThings.append(Thing().apply { name = "new appended" })
+        val loader = Thing.Loader("loooooooaaaader")
+
+        adapterThings.append(Thing("new appended"))
 
         adapterThings.show(things)
+
+        recycler.addOnScrollListener(object : EndlessRecyclerViewScrollListener() {
+
+            override fun onLoadMore() {
+
+                thread {
+                    runOnUiThread { if (!adapterThings.items.contains(loader)) adapterThings.append(loader) }
+                    Thread.sleep(5000)
+                    runOnUiThread { if (adapterThings.items.contains(loader)) adapterThings.remove(loader) }
+                }
+
+
+            }
+
+        })
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
