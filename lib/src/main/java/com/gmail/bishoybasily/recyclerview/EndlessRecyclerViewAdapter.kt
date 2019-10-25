@@ -16,12 +16,12 @@ abstract class EndlessRecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : Recy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): V {
         when (viewType) {
-            ItemLoader.TYPE -> return onCreateItemLoaderViewHolder(parent, viewType)
+            ItemLoader.TYPE -> return onCreateItemLoaderViewHolder(parent)
         }
         return super.onCreateViewHolder(parent, viewType)
     }
 
-    abstract fun onCreateItemLoaderViewHolder(parent: ViewGroup, viewType: Int): V
+    abstract fun onCreateItemLoaderViewHolder(parent: ViewGroup): V
 
     interface ItemLoader : Item {
 

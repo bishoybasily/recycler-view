@@ -56,13 +56,13 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): V {
-        return onCreateItemViewHolder(parent, viewType).apply {
+        return onCreateItemViewHolder(parent).apply {
             this@apply.clickListener = this@RecyclerViewAdapter.clickListener
             this@apply.longClickListener = this@RecyclerViewAdapter.longClickListener
         }
     }
 
-    abstract fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): V
+    abstract fun onCreateItemViewHolder(parent: ViewGroup): V
 
     final override fun onBindViewHolder(holder: V, position: Int) {
         holder.bind(_items[position])
