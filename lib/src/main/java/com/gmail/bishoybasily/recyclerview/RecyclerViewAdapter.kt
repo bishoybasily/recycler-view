@@ -14,41 +14,59 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
     private var clickListener: OnItemClickListener<I>? = null
     private var longClickListener: OnItemLongClickListener<I>? = null
 
-    fun show(p0: Collection<I>) {
+    private var recyclerView: RecyclerView? = null
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
+    }
+
+    fun show(p0: Collection<I>): RecyclerViewAdapter<I, V> {
         _items.clear()
         _items.addAll(p0)
         notifyDataSetChanged()
+        return this
     }
 
-    fun append(p0: Collection<I>) {
+    fun append(p0: Collection<I>): RecyclerViewAdapter<I, V> {
         if (_items.addAll(p0))
-            notifyItemRangeInserted(_items.size - p0.size, p0.size)
+            notifyItemRangeInserted(itemCount - p0.size, p0.size)
+        return this
     }
 
-    fun append(p0: I) {
+    fun append(p0: I): RecyclerViewAdapter<I, V> {
         if (_items.add(p0))
-            notifyItemInserted(_items.size - 1)
+            notifyItemInserted(itemCount - 1)
+        return this
     }
 
-    fun remove(position: Int) {
+    fun remove(position: Int): RecyclerViewAdapter<I, V> {
         if (position >= 0 && position < _items.size) {
             _items.removeAt(position)
             notifyItemRemoved(position)
         }
+        return this
     }
 
-    fun remove(p0: I) {
+    fun remove(p0: I): RecyclerViewAdapter<I, V> {
         val position = _items.indexOf(p0)
         remove(position)
+        return this
     }
 
     fun get(index: Int): I {
         return _items[index]
     }
 
-    fun clear() {
+    fun clear(): RecyclerViewAdapter<I, V> {
         _items.clear()
         notifyDataSetChanged()
+        return this
+    }
+
+    fun scrollToTheEnd(): RecyclerViewAdapter<I, V> {
+        recyclerView?.scrollToPosition(itemCount - 1)
+        return this
     }
 
     override fun getItemViewType(position: Int): Int {

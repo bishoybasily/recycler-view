@@ -16,12 +16,12 @@ import kotlinx.android.synthetic.main.item_thing.view.*
 
 class AdapterThings : EndlessRecyclerViewAdapter<Thing, AdapterThings.AbstractThingViewHolder>() {
 
-    override fun onCreateItemViewHolder(parent: ViewGroup): AbstractThingViewHolder {
+    override fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): AbstractThingViewHolder {
         val binder: ItemThingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_thing, parent, false)
         return ThingViewHolder(this, binder)
     }
 
-    override fun onCreateItemLoaderViewHolder(parent: ViewGroup): AbstractThingViewHolder {
+    override fun onCreateItemLoaderViewHolder(parent: ViewGroup, viewType: Int): AbstractThingViewHolder {
         val binder: ItemLoaderBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_loader, parent, false)
         return ThingLoaderViewHolder(this, binder)
     }
