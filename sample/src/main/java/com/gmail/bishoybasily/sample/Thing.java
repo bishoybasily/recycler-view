@@ -1,16 +1,12 @@
 package com.gmail.bishoybasily.sample;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-
 import com.gmail.bishoybasily.recyclerview.item.Item;
 import com.gmail.bishoybasily.recyclerview.item.ItemLoader;
 
 /**
  * Created by bishoy on 1/2/18.
  */
-
-public class Thing extends BaseObservable implements Item {
+public class Thing implements Item {
 
     public String name;
 
@@ -18,7 +14,6 @@ public class Thing extends BaseObservable implements Item {
         this.name = name;
     }
 
-    @Bindable
     public boolean selected;
 
     public void setSelected(boolean selected) {

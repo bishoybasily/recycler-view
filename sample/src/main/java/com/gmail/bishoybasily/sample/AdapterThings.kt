@@ -1,13 +1,11 @@
 package com.gmail.bishoybasily.sample
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.gmail.bishoybasily.recyclerview.adapter.EndlessRecyclerViewAdapter
 import com.gmail.bishoybasily.recyclerview.viewholder.RecyclerViewViewHolder
-import com.gmail.bishoybasily.sample.databinding.ItemLoaderBinding
-import com.gmail.bishoybasily.sample.databinding.ItemThingBinding
 import kotlinx.android.synthetic.main.item_thing.view.*
 
 /**
@@ -17,38 +15,47 @@ import kotlinx.android.synthetic.main.item_thing.view.*
 class AdapterThings : EndlessRecyclerViewAdapter<Thing, AdapterThings.AbstractThingViewHolder>() {
 
     override fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): AbstractThingViewHolder {
-        val binder: ItemThingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_thing, parent, false)
-        return ThingViewHolder(this, binder)
+        return ThingViewHolder(
+            this,
+            LayoutInflater.from(parent.context).inflate(R.layout.item_thing, parent, false)
+        )
     }
 
     override fun onCreateItemLoaderViewHolder(parent: ViewGroup, viewType: Int): AbstractThingViewHolder {
-        val binder: ItemLoaderBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_loader, parent, false)
-        return ThingLoaderViewHolder(this, binder)
+        return ThingLoaderViewHolder(
+            this,
+            LayoutInflater.from(parent.context).inflate(R.layout.item_loader, parent, false)
+        )
     }
 
-    abstract class AbstractThingViewHolder(adapter: AdapterThings, binder: ViewDataBinding) :
-            RecyclerViewViewHolder<Thing>(adapter, binder.root)
+    abstract class AbstractThingViewHolder(adapter: AdapterThings, view: View) :
+        RecyclerViewViewHolder<Thing>(adapter, view)
 
-    class ThingViewHolder(adapter: AdapterThings, val binder: ItemThingBinding) :
-            AbstractThingViewHolder(adapter, binder) {
+    class ThingViewHolder(adapter: AdapterThings, view: View) :
+        AbstractThingViewHolder(adapter, view) {
 
-        override fun onAttached(i: Thing) {
+        override fun onBound(i: Thing) {
 
-            binder.thing = i
-            binder.executePendingBindings()
+            itemView.textValue.text = i.name
+            itemView.textValue.setTextColor(if (i.selected) Color.RED else Color.BLACK)
+
+            itemView.setOnClickListener {
+                i.setSelected(!i.selected)
+                itemView.textValue.setTextColor(if (i.selected) Color.RED else Color.BLACK)
+            }
 
             itemView.remove.setOnClickListener {
                 adapter.remove(i)
             }
         }
 
-        override fun onDetached(i: Thing) {
+        override fun onRecycled(i: Thing) {
 
         }
     }
 
-    class ThingLoaderViewHolder(adapter: AdapterThings, val binder: ItemLoaderBinding) :
-            AbstractThingViewHolder(adapter, binder)
+    class ThingLoaderViewHolder(adapter: AdapterThings, view: View) :
+        AbstractThingViewHolder(adapter, view)
 
 }
 

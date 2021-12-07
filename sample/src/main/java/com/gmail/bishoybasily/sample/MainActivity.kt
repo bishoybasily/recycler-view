@@ -1,7 +1,6 @@
 package com.gmail.bishoybasily.sample
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +14,11 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
+    var count = 0
+
+    @Volatile
+    var fetching = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,35 +30,29 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = adapterThings
         recycler.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        adapterThings.onClick { i, _ ->
-            Log.w("@@", "Clicked ${i.name}")
-            i.setSelected(!i.selected)
-        }
+        val loader = Thing.Loader("")
 
-        adapterThings.onLongClick { i, _ ->
-            Log.w("@@", "Long clicked ${i.name}")
-            return@onLongClick true
-        }
+        adapterThings.append(fewThings())
 
-        val things = ArrayList<Thing>()
-        for (i in 0..10) {
-            things.add(Thing("Name $i"))
-        }
-
-        val loader = Thing.Loader("loooooooaaaader")
-
-        adapterThings.append(Thing("new appended"))
-
-        adapterThings.show(things)
-
-        recycler.addOnScrollListener(object : EndlessRecyclerViewScrollListener() {
+        val visibleThreshold = 4
+        recycler.addOnScrollListener(object : EndlessRecyclerViewScrollListener(visibleThreshold = visibleThreshold) {
 
             override fun onLoadMore() {
 
                 thread {
-                    runOnUiThread { if (!adapterThings.items.contains(loader)) adapterThings.append(loader) }
-                    Thread.sleep(5000)
-                    runOnUiThread { if (adapterThings.items.contains(loader)) adapterThings.remove(loader) }
+                    if (!fetching) {
+                        fetching = true
+                        runOnUiThread {
+                            adapterThings.appendOnce(loader)
+                        }
+                        Thread.sleep(1000)
+                        runOnUiThread {
+                            adapterThings.removeOnce(loader)
+                            adapterThings.append(fewThings())
+                            recycler.scrollToPosition(adapterThings.itemCount - (visibleThreshold * 2))
+                        }
+                        fetching = false
+                    }
                 }
 
 
@@ -64,8 +62,12 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+                .setAction("Action", null).show()
         }
+    }
+
+    private fun fewThings(): List<Thing> {
+        return (0..10).map { Thing("Name ${++count}") }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

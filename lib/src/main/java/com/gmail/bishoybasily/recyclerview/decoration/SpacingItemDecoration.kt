@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by bishoy on 8/22/17.
  */
-
 open class SpacingItemDecoration(
     val spacing: Int
 ) : RecyclerView.ItemDecoration() {

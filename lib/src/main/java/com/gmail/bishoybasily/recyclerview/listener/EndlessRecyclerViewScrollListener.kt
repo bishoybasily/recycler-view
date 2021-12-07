@@ -6,28 +6,21 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by bishoy on 7/15/17.
  */
+abstract class EndlessRecyclerViewScrollListener(
+    var visibleThreshold: Int = 4
+) : RecyclerView.OnScrollListener() {
 
-abstract class EndlessRecyclerViewScrollListener(var visibleThreshold: Int = 4) : RecyclerView.OnScrollListener() {
-
-    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
-        super.onScrolled(recyclerView, dx, dy)
+    final override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
         val manager = recyclerView.layoutManager
 
-        if (manager != null) {
+        if (manager != null && manager is LinearLayoutManager) {
 
-            if (manager is LinearLayoutManager) {
+            val lastVisible = manager.findLastCompletelyVisibleItemPosition()
+            val totalItemCount = manager.itemCount
 
-                val layoutManager = manager
-                val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
-
-                val totalItemCount = manager.itemCount
-
-                if (totalItemCount <= lastVisible + visibleThreshold)
-                    onLoadMore()
-
-            }
+            if (totalItemCount <= lastVisible + visibleThreshold)
+                onLoadMore()
 
         }
     }
