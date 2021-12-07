@@ -3,14 +3,14 @@ package com.gmail.bishoybasily.sample;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
-import com.gmail.bishoybasily.recyclerview.EndlessRecyclerViewAdapter;
-import com.gmail.bishoybasily.recyclerview.RecyclerViewAdapter;
+import com.gmail.bishoybasily.recyclerview.item.Item;
+import com.gmail.bishoybasily.recyclerview.item.ItemLoader;
 
 /**
  * Created by bishoy on 1/2/18.
  */
 
-public class Thing extends BaseObservable implements RecyclerViewAdapter.Item {
+public class Thing extends BaseObservable implements Item {
 
     public String name;
 
@@ -40,7 +40,7 @@ public class Thing extends BaseObservable implements RecyclerViewAdapter.Item {
         return name.hashCode();
     }
 
-    static class Loader extends Thing implements EndlessRecyclerViewAdapter.ItemLoader {
+    static class Loader extends Thing implements ItemLoader {
 
         public Loader(String name) {
             super(name);

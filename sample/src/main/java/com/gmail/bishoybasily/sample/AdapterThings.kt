@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.gmail.bishoybasily.recyclerview.EndlessRecyclerViewAdapter
-import com.gmail.bishoybasily.recyclerview.RecyclerViewViewHolder
+import com.gmail.bishoybasily.recyclerview.adapter.EndlessRecyclerViewAdapter
+import com.gmail.bishoybasily.recyclerview.viewholder.RecyclerViewViewHolder
 import com.gmail.bishoybasily.sample.databinding.ItemLoaderBinding
 import com.gmail.bishoybasily.sample.databinding.ItemThingBinding
 import kotlinx.android.synthetic.main.item_thing.view.*

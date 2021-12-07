@@ -1,11 +1,13 @@
-package com.gmail.bishoybasily.recyclerview
+package com.gmail.bishoybasily.recyclerview.decoration
 
 import android.graphics.Rect
 
 /**
  * Created by bishoy on 6/17/17.
  */
-class GridSpacingItemDecoration(spacing: Int, val columns: Int) : SpacingItemDecoration(spacing) {
+class GridSpacingItemDecoration(
+    spacing: Int, val columns: Int
+) : SpacingItemDecoration(spacing) {
 
     var spanLookup = object : SpanLookup {
         override fun isSpan(position: Int) = false

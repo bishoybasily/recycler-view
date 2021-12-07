@@ -1,12 +1,15 @@
-package com.gmail.bishoybasily.recyclerview
+package com.gmail.bishoybasily.recyclerview.adapter
 
 import android.view.ViewGroup
+import com.gmail.bishoybasily.recyclerview.item.Item
+import com.gmail.bishoybasily.recyclerview.item.ItemLoader
+import com.gmail.bishoybasily.recyclerview.viewholder.RecyclerViewViewHolder
 
 /**
  * Created by bishoy on 8/17/17.
  */
 
-abstract class EndlessRecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerViewAdapter<I, V>() {
+abstract class EndlessRecyclerViewAdapter<I : Item, V : RecyclerViewViewHolder<I>> : RecyclerViewAdapter<I, V>() {
 
     override fun getItemViewType(position: Int): Int {
         if (get(position) is ItemLoader)
@@ -22,13 +25,5 @@ abstract class EndlessRecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : Recy
     }
 
     abstract fun onCreateItemLoaderViewHolder(parent: ViewGroup, viewType: Int): V
-
-    interface ItemLoader : Item {
-
-        companion object {
-            val TYPE = 1
-        }
-
-    }
 
 }

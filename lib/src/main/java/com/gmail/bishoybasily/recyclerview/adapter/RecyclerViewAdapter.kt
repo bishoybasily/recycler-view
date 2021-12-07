@@ -1,10 +1,13 @@
-package com.gmail.bishoybasily.recyclerview
+package com.gmail.bishoybasily.recyclerview.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.gmail.bishoybasily.recyclerview.item.Item
+import com.gmail.bishoybasily.recyclerview.viewholder.RecyclerViewViewHolder
 
-abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerViewViewHolder<I>> : RecyclerView.Adapter<V>() {
+abstract class RecyclerViewAdapter<I : Item, V : RecyclerViewViewHolder<I>> :
+    RecyclerView.Adapter<V>() {
 
     private val _items = ArrayList<I>()
 
@@ -24,7 +27,7 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
     fun show(p0: Collection<I>): RecyclerViewAdapter<I, V> {
         _items.clear()
         _items.addAll(p0)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(0, itemCount)
         return this
     }
 
@@ -41,7 +44,7 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
     }
 
     fun remove(position: Int): RecyclerViewAdapter<I, V> {
-        if (position >= 0 && position < _items.size) {
+        if (position in 0 until itemCount) {
             _items.removeAt(position)
             notifyItemRemoved(position)
         }
@@ -60,7 +63,7 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
 
     fun clear(): RecyclerViewAdapter<I, V> {
         _items.clear()
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(0, itemCount)
         return this
     }
 
@@ -106,14 +109,6 @@ abstract class RecyclerViewAdapter<I : RecyclerViewAdapter.Item, V : RecyclerVie
                 return handler(i, view)
             }
         }
-    }
-
-    interface Item {
-
-        companion object {
-            val TYPE = 0
-        }
-
     }
 
     interface OnItemClickListener<in I : Item> {

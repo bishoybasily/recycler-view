@@ -1,11 +1,14 @@
-package com.gmail.bishoybasily.recyclerview
+package com.gmail.bishoybasily.recyclerview.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.gmail.bishoybasily.recyclerview.adapter.RecyclerViewAdapter
+import com.gmail.bishoybasily.recyclerview.item.Item
 
-abstract class RecyclerViewViewHolder<I : RecyclerViewAdapter.Item>(val adapter: RecyclerViewAdapter<I, *>,
-                                                                    val view: View) :
-        RecyclerView.ViewHolder(view) {
+abstract class RecyclerViewViewHolder<I : Item>(
+    val adapter: RecyclerViewAdapter<I, *>,
+    val view: View
+) : RecyclerView.ViewHolder(view) {
 
     var clickListener: RecyclerViewAdapter.OnItemClickListener<I>? = null
     var longClickListener: RecyclerViewAdapter.OnItemLongClickListener<I>? = null

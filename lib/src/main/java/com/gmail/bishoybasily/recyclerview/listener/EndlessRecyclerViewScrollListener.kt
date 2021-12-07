@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.recyclerview
+package com.gmail.bishoybasily.recyclerview.listener
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

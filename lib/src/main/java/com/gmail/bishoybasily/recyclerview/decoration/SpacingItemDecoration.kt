@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.recyclerview
+package com.gmail.bishoybasily.recyclerview.decoration
 
 import android.graphics.Rect
 import android.view.View
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by bishoy on 8/22/17.
  */
 
-open class SpacingItemDecoration(val spacing: Int) : RecyclerView.ItemDecoration() {
+open class SpacingItemDecoration(
+    val spacing: Int
+) : RecyclerView.ItemDecoration() {
 
     var skipLookup = object : SkipLookup {
         override fun shouldSkip(position: Int) = false
