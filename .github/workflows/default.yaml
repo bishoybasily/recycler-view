@@ -8,7 +8,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GITHUB_RELEASE: ${GITHUB_REF##*/}
+  GITHUB_RELEASE: ${GITHUB_REF#refs/*/}
 
 jobs:
   build:
